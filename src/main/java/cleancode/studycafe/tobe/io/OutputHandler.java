@@ -5,7 +5,7 @@ import cleancode.studycafe.tobe.model.StudyCafePass;
 
 import java.util.List;
 
-public class OutputHandler {
+public class OutputHandler implements OutputHandlerInterface {
 
     public void showWelcomeMessage() {
         System.out.println("*** 프리미엄 스터디카페 ***");

@@ -1,8 +1,8 @@
 package cleancode.studycafe.tobe.service;
 
-import cleancode.studycafe.tobe.model.PassTypeHandler;
-import cleancode.studycafe.tobe.io.InputHandler;
-import cleancode.studycafe.tobe.io.OutputHandler;
+import cleancode.studycafe.tobe.handler.PassTypeHandler;
+import cleancode.studycafe.tobe.io.InputHandlerInterface;
+import cleancode.studycafe.tobe.io.OutputHandlerInterface;
 import cleancode.studycafe.tobe.model.StudyCafePass;
 import cleancode.studycafe.tobe.model.StudyCafePassType;
 
@@ -10,11 +10,11 @@ import java.util.List;
 
 public class PassSelectionService {
 
-    private final InputHandler inputHandler;
-    private final OutputHandler outputHandler;
+    private final InputHandlerInterface inputHandler;
+    private final OutputHandlerInterface outputHandler;
     private final PassTypeHandler passTypeHandler;
 
-    public PassSelectionService(InputHandler inputHandler, OutputHandler outputHandler, PassTypeHandler passTypeHandler) {
+    public PassSelectionService(InputHandlerInterface inputHandler, OutputHandlerInterface outputHandler, PassTypeHandler passTypeHandler) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
         this.passTypeHandler = passTypeHandler;

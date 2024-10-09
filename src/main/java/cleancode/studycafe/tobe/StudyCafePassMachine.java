@@ -1,21 +1,29 @@
 package cleancode.studycafe.tobe;
 
 import cleancode.studycafe.tobe.exception.AppException;
-import cleancode.studycafe.tobe.model.FixedPassHandler;
-import cleancode.studycafe.tobe.model.PassTypeHandler;
-import cleancode.studycafe.tobe.io.InputHandler;
-import cleancode.studycafe.tobe.io.OutputHandler;
+import cleancode.studycafe.tobe.handler.FileHandler;
+import cleancode.studycafe.tobe.handler.FixedPassHandler;
+import cleancode.studycafe.tobe.handler.PassTypeHandler;
+import cleancode.studycafe.tobe.io.InputHandlerInterface;
+import cleancode.studycafe.tobe.io.OutputHandlerInterface;
 import cleancode.studycafe.tobe.model.StudyCafePass;
 import cleancode.studycafe.tobe.model.StudyCafePassType;
 import cleancode.studycafe.tobe.service.PassSelectionService;
 
 public class StudyCafePassMachine {
 
-    private final InputHandler inputHandler = new InputHandler();
-    private final OutputHandler outputHandler = new OutputHandler();
-    private final PassTypeHandler passTypeHandler = new PassTypeHandler();
-    private final PassSelectionService passSelectionService = new PassSelectionService(inputHandler, outputHandler, passTypeHandler);
-    private final FixedPassHandler fixedPassHandler = new FixedPassHandler(outputHandler, inputHandler);
+    private final InputHandlerInterface inputHandler;
+    private final OutputHandlerInterface outputHandler;
+    private final PassSelectionService passSelectionService;
+    private final FixedPassHandler fixedPassHandler;
+
+    public StudyCafePassMachine(InputHandlerInterface inputHandler, OutputHandlerInterface outputHandler, FileHandler fileHandler) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
+        PassTypeHandler passTypeHandler = new PassTypeHandler();
+        this.passSelectionService = new PassSelectionService(inputHandler, outputHandler, passTypeHandler);
+        this.fixedPassHandler = new FixedPassHandler(outputHandler, inputHandler);
+    }
 
     public void run() {
         try {
@@ -38,5 +46,4 @@ public class StudyCafePassMachine {
             outputHandler.showSimpleMessage("알 수 없는 오류가 발생했습니다.");
         }
     }
-
 }

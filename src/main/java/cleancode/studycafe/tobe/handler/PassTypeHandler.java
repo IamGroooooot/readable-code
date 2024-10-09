@@ -1,6 +1,8 @@
-package cleancode.studycafe.tobe.model;
+package cleancode.studycafe.tobe.handler;
 
 import cleancode.studycafe.tobe.io.StudyCafeFileHandler;
+import cleancode.studycafe.tobe.model.StudyCafePass;
+import cleancode.studycafe.tobe.model.StudyCafePassType;
 
 import java.util.List;
 import java.util.stream.Collectors;

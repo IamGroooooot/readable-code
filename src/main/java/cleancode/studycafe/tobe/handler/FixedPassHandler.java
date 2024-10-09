@@ -1,18 +1,20 @@
-package cleancode.studycafe.tobe.model;
+package cleancode.studycafe.tobe.handler;
 
-import cleancode.studycafe.tobe.io.InputHandler;
-import cleancode.studycafe.tobe.io.OutputHandler;
+import cleancode.studycafe.tobe.io.InputHandlerInterface;
+import cleancode.studycafe.tobe.io.OutputHandlerInterface;
 import cleancode.studycafe.tobe.io.StudyCafeFileHandler;
+import cleancode.studycafe.tobe.model.StudyCafeLockerPass;
+import cleancode.studycafe.tobe.model.StudyCafePass;
 
 import java.util.List;
 
 public class FixedPassHandler {
 
-    private final OutputHandler outputHandler;
-    private final InputHandler inputHandler;
+    private final OutputHandlerInterface outputHandler;
+    private final InputHandlerInterface inputHandler;
     private final StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
 
-    public FixedPassHandler(OutputHandler outputHandler, InputHandler inputHandler) {
+    public FixedPassHandler(OutputHandlerInterface outputHandler, InputHandlerInterface inputHandler) {
         this.outputHandler = outputHandler;
         this.inputHandler = inputHandler;
     }
