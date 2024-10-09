@@ -32,16 +32,12 @@ public class InputHandler implements InputHandlerInterface {
     }
 
     private StudyCafePassType parsePassType(String userInput) {
-        switch (userInput) {
-            case "1":
-                return StudyCafePassType.HOURLY;
-            case "2":
-                return StudyCafePassType.WEEKLY;
-            case "3":
-                return StudyCafePassType.FIXED;
-            default:
-                throw new AppException("잘못된 입력입니다.");
-        }
+        return switch (userInput) {
+            case "1" -> StudyCafePassType.HOURLY;
+            case "2" -> StudyCafePassType.WEEKLY;
+            case "3" -> StudyCafePassType.FIXED;
+            default -> throw new AppException("잘못된 입력입니다.");
+        };
     }
 
     private int parseSelectedIndex(String userInput, int listSize) {

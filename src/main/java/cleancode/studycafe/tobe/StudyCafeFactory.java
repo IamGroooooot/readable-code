@@ -1,5 +1,7 @@
 package cleancode.studycafe.tobe;
 
+import cleancode.studycafe.tobe.config.Configuration;
+import cleancode.studycafe.tobe.handler.FileHandler;
 import cleancode.studycafe.tobe.handler.FixedPassHandler;
 import cleancode.studycafe.tobe.handler.PassTypeHandler;
 import cleancode.studycafe.tobe.io.InputHandler;
@@ -19,16 +21,16 @@ public class StudyCafeFactory {
         return new OutputHandler();
     }
 
-    public StudyCafeFileHandler createFileHandler() {
-        return new StudyCafeFileHandler();
+    public StudyCafeFileHandler createFileHandler(Configuration configuration) {
+        return new StudyCafeFileHandler(configuration);
     }
 
-    public PassTypeHandler createPassTypeHandler() {
-        return new PassTypeHandler();
+    public PassTypeHandler createPassTypeHandler(FileHandler fileHandler) {
+        return new PassTypeHandler(fileHandler);
     }
 
-    public FixedPassHandler createFixedPassHandler(OutputHandlerInterface outputHandler, InputHandlerInterface inputHandler) {
-        return new FixedPassHandler(outputHandler, inputHandler);
+    public FixedPassHandler createFixedPassHandler(OutputHandlerInterface outputHandler, InputHandlerInterface inputHandler, FileHandler studyCafeFileHandler) {
+        return new FixedPassHandler(outputHandler, inputHandler, studyCafeFileHandler);
     }
 
     public StudyCafeService createStudyCafeService(InputHandlerInterface inputHandler, OutputHandlerInterface outputHandler, PassTypeHandler passTypeHandler, FixedPassHandler fixedPassHandler) {

@@ -1,6 +1,7 @@
 package cleancode.studycafe.tobe.io;
 
 import cleancode.studycafe.tobe.handler.FileHandler;
+import cleancode.studycafe.tobe.config.Configuration;
 import cleancode.studycafe.tobe.model.StudyCafeLockerPass;
 import cleancode.studycafe.tobe.model.StudyCafePass;
 import cleancode.studycafe.tobe.model.StudyCafePassType;
@@ -13,10 +14,16 @@ import java.util.List;
 
 public class StudyCafeFileHandler implements FileHandler {
 
+    private final Configuration config;
+
+    public StudyCafeFileHandler(Configuration config) {
+        this.config = config;
+    }
+
     @Override
     public List<StudyCafePass> readStudyCafePasses() {
         try {
-            List<String> lines = Files.readAllLines(Paths.get("src/main/resources/cleancode/studycafe/pass-list.csv"));
+            List<String> lines = Files.readAllLines(Paths.get(config.getStudyCafePassListPath()));
             List<StudyCafePass> studyCafePasses = new ArrayList<>();
             for (String line : lines) {
                 String[] values = line.split(",");
@@ -38,7 +45,7 @@ public class StudyCafeFileHandler implements FileHandler {
     @Override
     public List<StudyCafeLockerPass> readLockerPasses() {
         try {
-            List<String> lines = Files.readAllLines(Paths.get("src/main/resources/cleancode/studycafe/locker.csv"));
+            List<String> lines = Files.readAllLines(Paths.get(config.getStudyCafeLockerPath()));
             List<StudyCafeLockerPass> lockerPasses = new ArrayList<>();
             for (String line : lines) {
                 String[] values = line.split(",");

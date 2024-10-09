@@ -1,15 +1,14 @@
 package cleancode.studycafe.tobe;
 
-import cleancode.studycafe.tobe.handler.FileHandler;
-import cleancode.studycafe.tobe.io.*;
+import cleancode.studycafe.tobe.config.Configuration;
 
 public class StudyCafeApplication {
 
     public static void main(String[] args) {
-        final InputHandlerInterface inputHandler = new InputHandler();
-        final OutputHandlerInterface outputHandler = new OutputHandler();
-        final FileHandler fileHandler = new StudyCafeFileHandler();
-        StudyCafePassMachine studyCafePassMachine = new StudyCafePassMachine(inputHandler, outputHandler, fileHandler);
+        final Configuration configuration = new Configuration();
+        final StudyCafeFactory factory = new StudyCafeFactory();
+
+        StudyCafePassMachine studyCafePassMachine = new StudyCafePassMachine(factory, configuration);
         studyCafePassMachine.run();
     }
 
