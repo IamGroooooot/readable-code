@@ -3,9 +3,10 @@ package cleancode.studycafe.tobe.handler;
 import cleancode.studycafe.tobe.io.InputHandlerInterface;
 import cleancode.studycafe.tobe.io.OutputHandlerInterface;
 import cleancode.studycafe.tobe.model.StudyCafeLockerPass;
+import cleancode.studycafe.tobe.model.StudyCafeLockerPassCollection;
 import cleancode.studycafe.tobe.model.StudyCafePass;
 
-import java.util.List;
+import java.util.Optional;
 
 public class FixedPassHandler {
 
@@ -20,23 +21,20 @@ public class FixedPassHandler {
     }
 
     public void handleFixedPass(StudyCafePass selectedPass) {
-        List<StudyCafeLockerPass> lockerPasses = fileHandler.readLockerPasses();
-        StudyCafeLockerPass lockerPass = lockerPasses.stream()
-                .filter(option -> option.getPassType() == selectedPass.getPassType() &&
-                        option.getDuration() == selectedPass.getDuration())
-                .findFirst()
-                .orElse(null);
+        StudyCafeLockerPassCollection lockerPasses = fileHandler.readLockerPasses();
+        Optional<StudyCafeLockerPass> lockerPass = lockerPasses.getLockerPassForSelectedPass(selectedPass);
 
         boolean lockerSelection = false;
-        if (lockerPass != null) {
-            outputHandler.askLockerPass(lockerPass);
+        if (lockerPass.isPresent()) {
+            outputHandler.askLockerPass(lockerPass.orElse(null));
             lockerSelection = inputHandler.getLockerSelection();
         }
 
         if (lockerSelection) {
-            outputHandler.showPassOrderSummary(selectedPass, lockerPass);
+            outputHandler.showPassOrderSummary(selectedPass, lockerPass.orElse(null));
         } else {
             outputHandler.showPassOrderSummary(selectedPass, null);
         }
     }
+
 }
